@@ -1,0 +1,46 @@
+<section class="usuario-list">
+  <div class="list-header">
+    <h1>Usuarios</h1>
+    <button type="button" class="btn primary" (click)="crearUsuario()">Nuevo usuario</button>
+  </div>
+
+  <p class="status" *ngIf="cargando">Cargando usuarios...</p>
+  <p class="status error" *ngIf="!cargando && error">{{ error }}</p>
+
+  <table *ngIf="!cargando && usuarios.length > 0; else vacio" class="tabla">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th class="acciones">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios; trackBy: trackById">
+        <td>
+          <div class="nombre">
+            <span class="principal">{{ usuario.nombres }} {{ usuario.apellidos }}</span>
+            <span class="secundario">ID: {{ usuario.id }}</span>
+          </div>
+        </td>
+        <td>{{ usuario.correo }}</td>
+        <td>{{ usuario.telefono || '—' }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>
+          <span class="badge" [class.inactivo]="usuario.estado !== 'ACTIVO'">{{ usuario.estado }}</span>
+        </td>
+        <td class="acciones">
+          <button type="button" class="btn" (click)="editarUsuario(usuario)">Editar</button>
+          <button type="button" class="btn danger" (click)="eliminarUsuario(usuario)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #vacio>
+    <p class="status" *ngIf="!cargando">No hay usuarios registrados todavía.</p>
+  </ng-template>
+</section>

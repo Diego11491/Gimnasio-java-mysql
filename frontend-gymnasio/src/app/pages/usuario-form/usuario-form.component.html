@@ -1,0 +1,74 @@
+<section class="usuario-form">
+  <header class="form-header">
+    <div>
+      <h1>{{ esEdicion ? 'Editar usuario' : 'Nuevo usuario' }}</h1>
+      <p>Completa los campos obligatorios para {{ esEdicion ? 'actualizar' : 'registrar' }} un usuario.</p>
+    </div>
+    <a routerLink="/usuarios" class="btn">Volver al listado</a>
+  </header>
+
+  <p class="status error" *ngIf="error">{{ error }}</p>
+  <p class="status" *ngIf="cargando">Cargando información...</p>
+
+  <form *ngIf="!cargando" [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+    <div class="grid">
+      <label class="campo" [class.invalido]="form.controls.nombres.invalid && form.controls.nombres.touched">
+        <span>Nombres *</span>
+        <input type="text" formControlName="nombres" placeholder="Ej. Juan" />
+        <small *ngIf="form.controls.nombres.errors?.['required']">Este campo es obligatorio.</small>
+        <small *ngIf="form.controls.nombres.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.apellidos.invalid && form.controls.apellidos.touched">
+        <span>Apellidos *</span>
+        <input type="text" formControlName="apellidos" placeholder="Ej. Pérez" />
+        <small *ngIf="form.controls.apellidos.errors?.['required']">Este campo es obligatorio.</small>
+        <small *ngIf="form.controls.apellidos.errors?.['maxlength']">Máximo 100 caracteres.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.correo.invalid && form.controls.correo.touched">
+        <span>Correo electrónico *</span>
+        <input type="email" formControlName="correo" placeholder="correo@ejemplo.com" />
+        <small *ngIf="form.controls.correo.errors?.['required']">Este campo es obligatorio.</small>
+        <small *ngIf="form.controls.correo.errors?.['email']">Debe ser un correo válido.</small>
+        <small *ngIf="form.controls.correo.errors?.['maxlength']">Máximo 255 caracteres.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.contrasena.invalid && form.controls.contrasena.touched">
+        <span>Contraseña *</span>
+        <input type="password" formControlName="contrasena" placeholder="Mínimo 6 caracteres" />
+        <small *ngIf="form.controls.contrasena.errors?.['required']">Este campo es obligatorio.</small>
+        <small *ngIf="form.controls.contrasena.errors?.['minlength']">Debe tener al menos 6 caracteres.</small>
+        <small *ngIf="form.controls.contrasena.errors?.['maxlength']">Máximo 60 caracteres.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.telefono.invalid && form.controls.telefono.touched">
+        <span>Teléfono</span>
+        <input type="tel" formControlName="telefono" placeholder="Ej. +51 999 999 999" />
+        <small *ngIf="form.controls.telefono.errors?.['maxlength']">Máximo 30 caracteres.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.rol.invalid && form.controls.rol.touched">
+        <span>Rol *</span>
+        <select formControlName="rol">
+          <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+        </select>
+        <small *ngIf="form.controls.rol.errors?.['required']">Selecciona un rol.</small>
+      </label>
+
+      <label class="campo" [class.invalido]="form.controls.estado.invalid && form.controls.estado.touched">
+        <span>Estado *</span>
+        <select formControlName="estado">
+          <option *ngFor="let estado of estados" [value]="estado">{{ estado }}</option>
+        </select>
+        <small *ngIf="form.controls.estado.errors?.['required']">Selecciona un estado.</small>
+      </label>
+    </div>
+
+    <div class="acciones">
+      <button type="submit" class="btn primary" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : (esEdicion ? 'Actualizar' : 'Crear') }} usuario
+      </button>
+    </div>
+  </form>
+</section>
