@@ -29,22 +29,24 @@ public class UsuarioServiceImpl implements UsuarioService {
     if (repo.existsByCorreo(r.correo())) {
       throw new ResponseStatusException(HttpStatus.CONFLICT, "El correo ya está registrado");
     }
+
     Usuario u = Usuario.builder()
         .nombres(r.nombres())
         .apellidos(r.apellidos())
         .correo(r.correo())
-        .contrasena(r.contrasena()) // hashear con BCrypt en seguridad
+        .contrasena(r.contrasena()) 
         .telefono(r.telefono())
         .rol(r.rol() != null ? r.rol() : Rol.CLIENTE)
         .estado(r.estado() != null ? r.estado() : EstadoUsuario.ACTIVO)
         .build();
+
     u = repo.save(u);
     return toResponse(u);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public UsuarioResponse obtener(Long id) {
+  public UsuarioResponse obtener(Integer id) {
     Usuario u = repo.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
     return toResponse(u);
@@ -57,7 +59,7 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
-  public UsuarioResponse actualizar(Long id, UsuarioRequest r) {
+  public UsuarioResponse actualizar(Integer id, UsuarioRequest r) {
     Usuario u = repo.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
@@ -68,15 +70,18 @@ public class UsuarioServiceImpl implements UsuarioService {
     u.setNombres(r.nombres());
     u.setApellidos(r.apellidos());
     u.setCorreo(r.correo());
-    u.setContrasena(r.contrasena()); // hashear
+    u.setContrasena(r.contrasena());
     u.setTelefono(r.telefono());
-    u.setRol(r.rol() != null ? r.rol() : u.getRol());
-    u.setEstado(r.estado() != null ? r.estado() : u.getEstado());
+    if (r.rol() != null)
+      u.setRol(r.rol());
+    if (r.estado() != null)
+      u.setEstado(r.estado());
+
     return toResponse(u);
   }
 
   @Override
-  public void eliminar(Long id) {
+  public void eliminar(Integer id) {
     if (!repo.existsById(id)) {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
     }
@@ -84,10 +89,16 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   private UsuarioResponse toResponse(Usuario u) {
+    // Asegúrate de que UsuarioResponse use Integer para el id
     return new UsuarioResponse(
-        u.getId(), u.getNombres(), u.getApellidos(), u.getCorreo(),
-        u.getTelefono(), u.getRol(), u.getEstado(),
-        u.getFechaCreacion(), u.getFechaActualizacion()
-    );
+        u.getId(),
+        u.getNombres(),
+        u.getApellidos(),
+        u.getCorreo(),
+        u.getTelefono(),
+        u.getRol(),
+        u.getEstado(),
+        u.getFechaCreacion(),
+        u.getFechaActualizacion());
   }
 }

@@ -15,7 +15,7 @@ public class Usuario {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
   @Column(nullable = false, length = 100)
   private String nombres;
@@ -24,10 +24,10 @@ public class Usuario {
   private String apellidos;
 
   @Column(nullable = false, length = 255)
-  private String correo;          // UNIQUE en la BD
+  private String correo;       
 
   @Column(nullable = false, length = 60)
-  private String contrasena;      // guarda hash (BCrypt)
+  private String contrasena;    
 
   @Column(length = 30)
   private String telefono;

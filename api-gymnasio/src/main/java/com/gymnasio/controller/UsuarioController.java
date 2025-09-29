@@ -3,6 +3,7 @@ package com.gymnasio.controller;
 import com.gymnasio.dto.UsuarioRequest;
 import com.gymnasio.dto.UsuarioResponse;
 import com.gymnasio.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,25 +21,34 @@ public class UsuarioController {
     this.service = service;
   }
 
+  @Operation(summary = "Listar usuarios")
   @GetMapping
-  public List<UsuarioResponse> listar() { return service.listar(); }
+  public List<UsuarioResponse> listar() {
+    return service.listar();
+  }
 
+  @Operation(summary = "Obtener usuario por id")
   @GetMapping("/{id}")
-  public UsuarioResponse obtener(@PathVariable Long id) { return service.obtener(id); }
+  public UsuarioResponse obtener(@PathVariable Integer id) {
+    return service.obtener(id);
+  }
 
+  @Operation(summary = "Crear usuario")
   @PostMapping
   public ResponseEntity<UsuarioResponse> crear(@Valid @RequestBody UsuarioRequest request) {
     UsuarioResponse creado = service.crear(request);
     return ResponseEntity.status(HttpStatus.CREATED).body(creado);
   }
 
+  @Operation(summary = "Actualizar usuario")
   @PutMapping("/{id}")
-  public UsuarioResponse actualizar(@PathVariable Long id, @Valid @RequestBody UsuarioRequest request) {
+  public UsuarioResponse actualizar(@PathVariable Integer id, @Valid @RequestBody UsuarioRequest request) {
     return service.actualizar(id, request);
   }
 
+  @Operation(summary = "Eliminar usuario")
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+  public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
     service.eliminar(id);
     return ResponseEntity.noContent().build();
   }

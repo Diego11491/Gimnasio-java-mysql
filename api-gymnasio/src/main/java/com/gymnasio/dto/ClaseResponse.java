@@ -5,11 +5,11 @@ import com.gymnasio.domain.model.EstadoClase;
 import java.time.LocalDateTime;
 
 public record ClaseResponse(
-        Long id,
+        Integer id,
         String titulo,
         String descripcion,
         String tipo,
-        Long instructorId,
+        Integer instructorId,
         String instructorNombre,
         LocalDateTime fechaInicio,
         Integer duracionMinutos,

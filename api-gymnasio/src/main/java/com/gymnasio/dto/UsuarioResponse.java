@@ -6,7 +6,7 @@ import com.gymnasio.domain.model.Rol;
 import java.time.LocalDateTime;
 
 public record UsuarioResponse(
-    Long id,
+    Integer id,
     String nombres,
     String apellidos,
     String correo,

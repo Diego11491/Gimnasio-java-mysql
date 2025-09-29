@@ -1,9 +1,9 @@
 package com.gymnasio.dto;
 
 public interface DisponibilidadClaseView {
-  Long getClaseId();
+  Integer getClaseId();
   String getTitulo();
   Integer getCapacidad();
-  Long getReservadas();
-  Long getDisponibles();
+  Integer getReservadas();
+  Integer getDisponibles();
 }

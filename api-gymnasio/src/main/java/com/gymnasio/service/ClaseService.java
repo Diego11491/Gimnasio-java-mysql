@@ -1,19 +1,21 @@
 package com.gymnasio.service;
 
-import com.gymnasio.dto.*;
+import com.gymnasio.dto.ClaseRequest;
+import com.gymnasio.dto.ClaseResponse;
+import com.gymnasio.dto.DisponibilidadClaseView;
 
 import java.util.List;
 
 public interface ClaseService {
-    ClaseResponse crear(ClaseRequest request);
-
-    ClaseResponse obtener(Long id);
-
     List<ClaseResponse> listar();
 
-    ClaseResponse actualizar(Long id, ClaseRequest request);
+    ClaseResponse obtener(Integer id);
 
-    void eliminar(Long id);
+    DisponibilidadClaseView disponibilidad(Integer id);
 
-    DisponibilidadClaseView disponibilidad(Long claseId);
+    ClaseResponse crear(ClaseRequest request);
+
+    ClaseResponse actualizar(Integer id, ClaseRequest request);
+
+    void eliminar(Integer id);
 }

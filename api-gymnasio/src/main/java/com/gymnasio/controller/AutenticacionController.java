@@ -20,7 +20,7 @@ public class AutenticacionController {
 
   @PostMapping("/registro")
   public ResponseEntity<UsuarioResponse> registro(@Valid @RequestBody UsuarioRequest req) {
-    return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.crear(req)); // asegurarse de hashear en el service
+    return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.crear(req));
   }
 
   @PostMapping("/login")

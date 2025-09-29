@@ -1,6 +1,8 @@
 package com.gymnasio.controller;
 
-import com.gymnasio.dto.*;
+import com.gymnasio.dto.ClaseRequest;
+import com.gymnasio.dto.ClaseResponse;
+import com.gymnasio.dto.DisponibilidadClaseView;
 import com.gymnasio.service.ClaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -27,13 +29,13 @@ public class ClaseController {
 
     @Operation(summary = "Obtener clase por id")
     @GetMapping("/{id}")
-    public ClaseResponse obtener(@PathVariable Long id) {
+    public ClaseResponse obtener(@PathVariable Integer id) {
         return service.obtener(id);
     }
 
     @Operation(summary = "Disponibilidad de cupos (JPQL)")
     @GetMapping("/{id}/disponibilidad")
-    public DisponibilidadClaseView disponibilidad(@PathVariable Long id) {
+    public DisponibilidadClaseView disponibilidad(@PathVariable Integer id) {
         return service.disponibilidad(id);
     }
 
@@ -47,14 +49,14 @@ public class ClaseController {
     @Operation(summary = "Actualizar clase (ADMIN/TRAINER)")
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','TRAINER')")
-    public ClaseResponse actualizar(@PathVariable Long id, @Valid @RequestBody ClaseRequest request) {
+    public ClaseResponse actualizar(@PathVariable Integer id, @Valid @RequestBody ClaseRequest request) {
         return service.actualizar(id, request);
     }
 
     @Operation(summary = "Eliminar clase (ADMIN)")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public void eliminar(@PathVariable Long id) {
+    public void eliminar(@PathVariable Integer id) {
         service.eliminar(id);
     }
 }
