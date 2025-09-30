@@ -8,6 +8,7 @@ import com.gymnasio.dto.UsuarioResponse;
 import com.gymnasio.repository.UsuarioRepository;
 import com.gymnasio.service.UsuarioService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,9 +20,11 @@ import java.util.List;
 public class UsuarioServiceImpl implements UsuarioService {
 
   private final UsuarioRepository repo;
+  private final PasswordEncoder encoder;
 
-  public UsuarioServiceImpl(UsuarioRepository repo) {
+  public UsuarioServiceImpl(UsuarioRepository repo, PasswordEncoder encoder) {
     this.repo = repo;
+    this.encoder = encoder;
   }
 
   @Override
@@ -34,7 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         .nombres(r.nombres())
         .apellidos(r.apellidos())
         .correo(r.correo())
-        .contrasena(r.contrasena()) 
+        .contrasena(encoder.encode(r.contrasena())) // <- BCrypt
         .telefono(r.telefono())
         .rol(r.rol() != null ? r.rol() : Rol.CLIENTE)
         .estado(r.estado() != null ? r.estado() : EstadoUsuario.ACTIVO)
@@ -70,7 +73,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     u.setNombres(r.nombres());
     u.setApellidos(r.apellidos());
     u.setCorreo(r.correo());
-    u.setContrasena(r.contrasena());
+
+    // Solo re-hash si enviaron una nueva contraseña no vacía
+    if (r.contrasena() != null && !r.contrasena().isBlank()) {
+      u.setContrasena(encoder.encode(r.contrasena())); // <- BCrypt
+    }
+
     u.setTelefono(r.telefono());
     if (r.rol() != null)
       u.setRol(r.rol());
@@ -89,7 +97,6 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   private UsuarioResponse toResponse(Usuario u) {
-    // Asegúrate de que UsuarioResponse use Integer para el id
     return new UsuarioResponse(
         u.getId(),
         u.getNombres(),
