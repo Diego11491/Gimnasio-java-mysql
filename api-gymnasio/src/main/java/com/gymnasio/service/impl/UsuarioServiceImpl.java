@@ -62,6 +62,12 @@ public class UsuarioServiceImpl implements UsuarioService {
   }
 
   @Override
+  @Transactional(readOnly = true)
+  public List<UsuarioResponse> buscar(String q, Rol rol, EstadoUsuario estado) {
+    return repo.buscar(q, rol, estado).stream().map(this::toResponse).toList();
+  }
+
+  @Override
   public UsuarioResponse actualizar(Integer id, UsuarioRequest r) {
     Usuario u = repo.findById(id)
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));

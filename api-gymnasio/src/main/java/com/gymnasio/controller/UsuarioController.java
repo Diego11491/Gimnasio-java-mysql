@@ -1,5 +1,7 @@
 package com.gymnasio.controller;
 
+import com.gymnasio.domain.model.Rol;
+import com.gymnasio.domain.model.EstadoUsuario;
 import com.gymnasio.dto.UsuarioRequest;
 import com.gymnasio.dto.UsuarioResponse;
 import com.gymnasio.service.UsuarioService;
@@ -51,5 +53,13 @@ public class UsuarioController {
   public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
     service.eliminar(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("/buscar")
+  public List<UsuarioResponse> buscar(
+      @RequestParam(required = false) String q,
+      @RequestParam(required = false) Rol rol,
+      @RequestParam(required = false) EstadoUsuario estado) {
+    return service.buscar(q, rol, estado);
   }
 }
