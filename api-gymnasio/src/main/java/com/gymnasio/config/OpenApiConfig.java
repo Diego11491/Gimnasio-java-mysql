@@ -15,7 +15,7 @@ public class OpenApiConfig {
         final String schemeName = "bearerAuth";
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Gymnasio")
+                        .title("Smart Gym")
                         .description("Spring Boot + MySQL + JWT")
                         .version("v1"))
                 .components(new Components()
