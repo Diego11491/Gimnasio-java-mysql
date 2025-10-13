@@ -1,33 +1,62 @@
 package com.gymnasio.security;
 
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-  private final JwtTokenProvider jwt; private final UserDetailsService uds;
-  public JwtAuthenticationFilter(JwtTokenProvider jwt, UserDetailsService uds){ this.jwt = jwt; this.uds = uds; }
+
+  private final JwtTokenProvider jwt;
+
+  public JwtAuthenticationFilter(JwtTokenProvider jwt) {
+    this.jwt = jwt;
+  }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws ServletException, IOException {
-    String header = req.getHeader("Authorization");
-    if (header != null && header.startsWith("Bearer ")) {
-      String token = header.substring(7);
-      if (jwt.validar(token)) {
-        String username = jwt.getUsername(token);
-        UserDetails user = uds.loadUserByUsername(username);
-        var auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-        auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-      }
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+      throws ServletException, IOException {
+
+    String header = request.getHeader("Authorization");
+    if (header == null || !header.startsWith("Bearer ")) {
+      chain.doFilter(request, response);
+      return;
     }
-    chain.doFilter(req, res);
+
+    String token = header.substring(7);
+    if (!jwt.esValido(token)) {
+      chain.doFilter(request, response);
+      return;
+    }
+
+    String username = jwt.getUsername(token);
+    List<String> roles = jwt.getRoles(token); // p.ej. ["ADMIN","CLIENTE"]
+
+    // Opción A
+    // List<SimpleGrantedAuthority> authorities = roles.stream()
+    // .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
+    // .collect(Collectors.toList());
+
+    // Opción B (más general):
+    Collection<? extends GrantedAuthority> authorities = roles.stream()
+        .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
+        .collect(Collectors.toList());
+
+    var auth = new UsernamePasswordAuthenticationToken(username, null, authorities);
+    SecurityContextHolder.getContext().setAuthentication(auth);
+
+    chain.doFilter(request, response);
   }
 }

@@ -2,26 +2,59 @@ package com.gymnasio.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.util.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
+import org.springframework.stereotype.Component;
 
 @Component
 public class JwtTokenProvider {
-  private final Key key; private final long expirationMs;
-  public JwtTokenProvider(@Value("${app.jwt.secret}") String secret, @Value("${app.jwt.expiration-ms}") long exp) {
-    this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)); this.expirationMs = exp;
+
+  // Cambia este secreto por uno más largo/seguro (>=32 bytes para HS256)
+  private static final String SECRET = "5aZq9vJrT4m8W2x7P0bC6nY1uE3kD8hQ";
+  private static final int EXP_MINUTES = 120;
+
+  private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
+
+  public String generar(String username, String rolUnico) {
+    // Si luego manejas múltiples roles, pásalos como lista
+    List<String> roles = List.of(rolUnico);
+
+    Instant now = Instant.now();
+    return Jwts.builder()
+        .setSubject(username)
+        .claim("roles", roles) // ["ADMIN"] / ["CLIENTE"] / ...
+        .setIssuedAt(Date.from(now))
+        .setExpiration(Date.from(now.plus(EXP_MINUTES, ChronoUnit.MINUTES)))
+        .signWith(key, SignatureAlgorithm.HS256)
+        .compact();
   }
-  public String generar(String username, String rol){
-    Date now = new Date(), exp = new Date(now.getTime()+expirationMs);
-    return Jwts.builder().setSubject(username).claim("rol", rol).setIssuedAt(now).setExpiration(exp).signWith(key, SignatureAlgorithm.HS256).compact();
+
+  public boolean esValido(String token) {
+    try {
+      Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+      return true;
+    } catch (JwtException | IllegalArgumentException e) {
+      return false;
+    }
   }
-  public String getUsername(String token){ return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody().getSubject(); }
-  public boolean validar(String token){
-    try { Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token); return true; }
-    catch (JwtException | IllegalArgumentException e){ return false; }
+
+  public String getUsername(String token) {
+    return Jwts.parserBuilder().setSigningKey(key).build()
+        .parseClaimsJws(token).getBody().getSubject();
+  }
+
+  @SuppressWarnings("unchecked")
+  public List<String> getRoles(String token) {
+    Object claim = Jwts.parserBuilder().setSigningKey(key).build()
+        .parseClaimsJws(token).getBody().get("roles");
+    if (claim instanceof List<?> list) {
+      return list.stream().map(Object::toString).toList();
+    }
+    return Collections.emptyList();
   }
 }
-

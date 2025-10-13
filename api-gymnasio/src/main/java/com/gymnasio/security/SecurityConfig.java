@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -19,7 +18,7 @@ public class SecurityConfig {
 
   private final JwtAuthenticationFilter jwtFilter;
 
-  public SecurityConfig(JwtAuthenticationFilter jwtFilter, UserDetailsService userDetailsService) {
+  public SecurityConfig(JwtAuthenticationFilter jwtFilter) {
     this.jwtFilter = jwtFilter;
   }
 
@@ -29,6 +28,7 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
+        // PÚBLICOS:
           .requestMatchers(
               "/api/auth/**",
               "/v3/api-docs/**",
@@ -44,7 +44,7 @@ public class SecurityConfig {
 
   @Bean
   PasswordEncoder passwordEncoder() {
-    // usa BCrypt en BD (no NOOP)
+    // usa BCrypt en BD
     return new BCryptPasswordEncoder();
   }
 
