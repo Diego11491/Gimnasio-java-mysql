@@ -23,3 +23,4 @@ public interface ClaseRepository extends JpaRepository<Clase, Integer> {
     DisponibilidadClaseView disponibilidad(@Param("claseId") Integer claseId,
                                           @Param("estado") EstadoReserva estado);
 }
+

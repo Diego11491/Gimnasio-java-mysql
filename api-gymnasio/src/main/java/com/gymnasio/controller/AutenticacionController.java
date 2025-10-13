@@ -47,7 +47,7 @@ public class AutenticacionController {
   @PostMapping("/login")
   public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest req) {
     try {
-      // Valida credenciales (si son inválidas lanza BadCredentialsException)
+      // Valida credenciales (si son invalidas lanza BadCredentialsException)
       Authentication auth = authManager.authenticate(
           new UsernamePasswordAuthenticationToken(req.correo(), req.contrasena())
       );

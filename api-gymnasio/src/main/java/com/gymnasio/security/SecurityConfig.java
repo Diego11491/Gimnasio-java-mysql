@@ -18,11 +18,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
   private final JwtAuthenticationFilter jwtFilter;
-  private final UserDetailsService userDetailsService;
 
   public SecurityConfig(JwtAuthenticationFilter jwtFilter, UserDetailsService userDetailsService) {
     this.jwtFilter = jwtFilter;
-    this.userDetailsService = userDetailsService;
   }
 
   @Bean
@@ -41,12 +39,6 @@ public class SecurityConfig {
           .anyRequest().authenticated()
       )
       .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
-    // (opcional) si quieres forzar el provider por el UserDetailsService de tu app:
-    // http.authenticationProvider(new DaoAuthenticationProvider(passwordEncoder()){{
-    //   setUserDetailsService(userDetailsService);
-    // }});
-
     return http.build();
   }
 
@@ -58,7 +50,6 @@ public class SecurityConfig {
 
   @Bean
   AuthenticationManager authenticationManager(AuthenticationConfiguration conf) throws Exception {
-    // forma recomendada en Spring Security 6
     return conf.getAuthenticationManager();
   }
 }
