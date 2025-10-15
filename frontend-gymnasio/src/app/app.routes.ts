@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-
-import { UsuarioListComponent } from './pages/usuario-list/usuario-list.component';
-import { UsuarioFormComponent } from './pages/usuario-form/usuario-form.component';
+import { InicioComponent } from './Vistas/inicio/inicio.component';
+import { LoginComponent } from './Vistas/login/login.component';
+import { RegistroComponent } from './Vistas/registro/registro.component';
+import { DashboardComponent } from './Vistas/dashboard/dashboard.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'usuarios' },
-  { path: 'usuarios', component: UsuarioListComponent },
-  { path: 'usuarios/nuevo', component: UsuarioFormComponent },
-  { path: 'usuarios/:id/editar', component: UsuarioFormComponent },
-  { path: '**', redirectTo: 'usuarios' }
+    { path: '', component: InicioComponent }, // Ruta principal
+    { path: 'login', component: LoginComponent },
+    { path: 'registro', component: RegistroComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: '**', redirectTo: '', pathMatch: 'full' } 
 ];

@@ -1,0 +1,7 @@
+<div class="dashboard-container">
+    <div class="welcome-box">
+      <h1 *ngIf="nombreUsuario">¡Bienvenido, {{ nombreUsuario }}!</h1>
+      <p>Esta es tu página principal. Desde aquí podrás gestionar tus rutinas, clases y progreso.</p>
+      <button (click)="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
+    </div>
+  </div>

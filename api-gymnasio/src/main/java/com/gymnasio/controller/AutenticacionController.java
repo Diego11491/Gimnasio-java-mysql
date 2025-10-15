@@ -58,8 +58,15 @@ public class AutenticacionController {
       String token = jwt.generar(user.getCorreo(), user.getRol().name());
 
       return ResponseEntity.ok(
-          new AuthResponse("Bearer", token, user.getCorreo(), user.getRol().name())
-      );
+                new AuthResponse(
+                        "Bearer",
+                        token,
+                        user.getCorreo(),
+                        user.getRol().name(),
+                        user.getNombres(),    // <--- Campo añadido
+                        user.getApellidos()   // <--- Campo añadido
+                )
+        );
     } catch (BadCredentialsException ex) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
