@@ -1,24 +1,155 @@
+<!-- HTML Component Template -->
 <div class="hero-container">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
+  <div class="hero-overlay"></div>
   
-      <div *ngIf="!autenticacionService.isLoggedIn(); else usuarioLogueado">
-        <h1>Smart Gym</h1>
+  <!-- Elementos decorativos animados -->
+  <div class="floating-elements">
+    <div class="float-icon icon-1">💪</div>
+    <div class="float-icon icon-2">🏋️</div>
+    <div class="float-icon icon-3">⚡</div>
+    <div class="float-icon icon-4">🔥</div>
+    <div class="float-icon icon-5">🎯</div>
+    <div class="float-icon icon-6">💪</div>
+  </div>
+  
+  <!-- Líneas decorativas -->
+  <div class="decorative-lines">
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+    <div class="line line-3"></div>
+  </div>
+  
+  <div class="hero-content">
+    
+    <div *ngIf="!autenticacionService.isLoggedIn(); else usuarioLogueado">
+      <!-- Badge decorativo -->
+      <div class="badge-top">
+        <span class="badge-text">✨ Tu transformación empieza hoy</span>
+      </div>
+      
+      <h1>
+        <span class="title-word">Smart</span>
+        <span class="title-word word-gym">Gym</span>
+      </h1>
+      
+      <div class="subtitle-container">
+        <div class="line-accent"></div>
         <p>Tu viaje hacia una vida más fuerte comienza aquí.</p>
-        <div class="button-container">
-          <a routerLink="/login" class="btn btn-primary">Iniciar Sesión</a>
-          <a routerLink="/registro" class="btn btn-secondary">Registrarse</a>
+        <div class="line-accent"></div>
+      </div>
+      
+      <!-- Features rápidos -->
+      <div class="features-quick">
+        <div class="feature-item">
+          <span class="feature-icon">📊</span>
+          <span>Seguimiento</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <span>Objetivos</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">📈</span>
+          <span>Progreso</span>
         </div>
       </div>
-  
-      <ng-template #usuarioLogueado>
-        <h1>¡Bienvenido de Nuevo!</h1>
-        <p>Continúa tu progreso y alcanza nuevas metas.</p>
-        <div class="button-container">
-          <a routerLink="/dashboard" class="btn btn-primary">Ir a mi Dashboard</a>
-          <button (click)="cerrarSesion()" class="btn btn-secondary">Cerrar Sesión</button>
+      
+      <div class="button-container">
+        <a routerLink="/login" class="btn btn-primary">
+          <span class="btn-text">Iniciar Sesión</span>
+          <span class="btn-icon">→</span>
+        </a>
+        <a routerLink="/registro" class="btn btn-secondary">
+          <span class="btn-text">Registrarse</span>
+          <span class="btn-icon">✓</span>
+        </a>
+      </div>
+      
+      <!-- Stats decorativos -->
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">1000+</span>
+          <span class="stat-label">Miembros Activos</span>
         </div>
-      </ng-template>
-  
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Rutinas Personalizadas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Soporte</span>
+        </div>
+      </div>
     </div>
+
+    <ng-template #usuarioLogueado>
+      <!-- Badge de bienvenida -->
+      <div class="badge-top welcome-badge">
+        <span class="badge-text">🎉 ¡Nos alegra verte de nuevo!</span>
+      </div>
+      
+      <h1>
+        <span class="title-word">¡Bienvenido</span>
+        <span class="title-word word-gym">de Nuevo!</span>
+      </h1>
+      
+      <div class="subtitle-container">
+        <div class="line-accent"></div>
+        <p>Continúa tu progreso y alcanza nuevas metas.</p>
+        <div class="line-accent"></div>
+      </div>
+      
+      <!-- Quick stats usuario logueado -->
+      <div class="user-quick-stats">
+        <div class="quick-stat">
+          <span class="quick-stat-icon">🔥</span>
+          <div class="quick-stat-info">
+            <span class="quick-stat-value">5</span>
+            <span class="quick-stat-label">Días de racha</span>
+          </div>
+        </div>
+        <div class="quick-stat">
+          <span class="quick-stat-icon">💪</span>
+          <div class="quick-stat-info">
+            <span class="quick-stat-value">12</span>
+            <span class="quick-stat-label">Entrenamientos</span>
+          </div>
+        </div>
+        <div class="quick-stat">
+          <span class="quick-stat-icon">⭐</span>
+          <div class="quick-stat-info">
+            <span class="quick-stat-value">85%</span>
+            <span class="quick-stat-label">Progreso</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="button-container">
+        <a routerLink="/dashboard" class="btn btn-primary">
+          <span class="btn-text">Ir a mi Dashboard</span>
+          <span class="btn-icon">→</span>
+        </a>
+        <button (click)="cerrarSesion()" class="btn btn-secondary">
+          <span class="btn-text">Cerrar Sesión</span>
+          <span class="btn-icon">↗</span>
+        </button>
+      </div>
+      
+      <!-- Motivational quote -->
+      <div class="motivation-quote">
+        <p>"El único mal entrenamiento es el que no hiciste"</p>
+      </div>
+    </ng-template>
+    
   </div>
+  
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <span>Desliza para explorar</span>
+  </div>
+</div>

@@ -1,7 +1,175 @@
 <div class="dashboard-container">
-    <div class="welcome-box">
-      <h1 *ngIf="nombreUsuario">¡Bienvenido, {{ nombreUsuario }}!</h1>
-      <p>Esta es tu página principal. Desde aquí podrás gestionar tus rutinas, clases y progreso.</p>
-      <button (click)="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
+  <!-- Overlay con efectos -->
+  <div class="background-overlay"></div>
+  
+  <!-- Elementos flotantes -->
+  <div class="floating-elements">
+    <div class="float-icon icon-1">💪</div>
+    <div class="float-icon icon-2">🏋️</div>
+    <div class="float-icon icon-3">🎯</div>
+    <div class="float-icon icon-4">⭐</div>
+  </div>
+  
+  <!-- Líneas decorativas -->
+  <div class="decorative-lines">
+    <div class="line line-1"></div>
+    <div class="line line-2"></div>
+  </div>
+
+  <div class="dashboard-content">
+    <!-- Header del Dashboard -->
+    <div class="dashboard-header">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <div class="logo-circle">
+          <span class="logo-icon">💪</span>
+        </div>
+      </div>
+
+      <div class="welcome-section">
+        <h1 *ngIf="nombreUsuario">
+          <span class="welcome-text">¡Bienvenido,</span>
+          <span class="user-name">{{ nombreUsuario }}!</span>
+        </h1>
+        <p class="subtitle">
+          <span class="subtitle-icon">🚀</span>
+          Tu centro de control fitness
+        </p>
+      </div>
+
+      <button (click)="cerrarSesion()" class="btn-logout">
+        <span class="btn-content">
+          <span class="logout-icon">🚪</span>
+          <span>Cerrar Sesión</span>
+        </span>
+      </button>
+    </div>
+
+    <!-- Cards de estadísticas rápidas -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div class="stat-content">
+          <h3 class="stat-value">12</h3>
+          <p class="stat-label">Entrenamientos</p>
+        </div>
+        <div class="stat-trend">+3 esta semana</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-content">
+          <h3 class="stat-value">8.5h</h3>
+          <p class="stat-label">Tiempo Total</p>
+        </div>
+        <div class="stat-trend">+1.2h esta semana</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-content">
+          <h3 class="stat-value">85%</h3>
+          <p class="stat-label">Meta Semanal</p>
+        </div>
+        <div class="stat-trend">¡Casi lo logras!</div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-content">
+          <h3 class="stat-value">24</h3>
+          <p class="stat-label">Racha Días</p>
+        </div>
+        <div class="stat-trend">¡Nuevo récord!</div>
+      </div>
+    </div>
+
+    <!-- Acciones rápidas -->
+    <div class="quick-actions">
+      <h2 class="section-title">
+        <span class="title-icon">⚡</span>
+        Acciones Rápidas
+      </h2>
+      
+      <div class="actions-grid">
+        <div class="action-card">
+          <div class="action-icon">📋</div>
+          <h3>Mis Rutinas</h3>
+          <p>Gestiona y crea tus rutinas de entrenamiento</p>
+          <button class="btn-action">
+            <span>Ver Rutinas</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">🗓️</div>
+          <h3>Mis Clases</h3>
+          <p>Reserva y administra tus clases programadas</p>
+          <button class="btn-action">
+            <span>Ver Clases</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">📊</div>
+          <h3>Mi Progreso</h3>
+          <p>Revisa tus estadísticas y mejora continua</p>
+          <button class="btn-action">
+            <span>Ver Progreso</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <div class="action-card">
+          <div class="action-icon">⚙️</div>
+          <h3>Configuración</h3>
+          <p>Personaliza tu perfil y preferencias</p>
+          <button class="btn-action">
+            <span>Configurar</span>
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Próxima actividad -->
+    <div class="next-activity">
+      <div class="activity-header">
+        <h2 class="section-title">
+          <span class="title-icon">🔔</span>
+          Próxima Actividad
+        </h2>
+      </div>
+      
+      <div class="activity-card">
+        <div class="activity-icon">🏋️‍♂️</div>
+        <div class="activity-info">
+          <h3>Entrenamiento de Fuerza</h3>
+          <p class="activity-time">
+            <span class="time-icon">🕐</span>
+            Hoy a las 18:00
+          </p>
+          <p class="activity-location">
+            <span class="location-icon">📍</span>
+            Gimnasio Principal - Sala 2
+          </p>
+        </div>
+        <button class="btn-start">
+          <span>Iniciar</span>
+          <span class="play-icon">▶</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Motivación diaria -->
+    <div class="motivation-box">
+      <div class="motivation-icon">💫</div>
+      <p class="motivation-text">
+        "El único entrenamiento malo es el que no se hace"
+      </p>
+      <span class="motivation-author">- Anónimo</span>
     </div>
   </div>
+</div>
