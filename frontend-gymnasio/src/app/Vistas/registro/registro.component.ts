@@ -26,6 +26,7 @@ export class RegistroComponent {
       nombres: ['', [Validators.required]], // Cambiado de 'nombre' a 'nombres'
       apellidos: ['', [Validators.required]], // Campo nuevo
       correo: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[\+]?[0-9\s\-\(\)]+$/)]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
