@@ -146,15 +146,15 @@
     border-radius: 20px;
     padding: 2px;
     background: linear-gradient(135deg, rgba(255, 193, 7, 0.3), transparent, rgba(255, 193, 7, 0.3));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, 
+                  linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
+    
+    mask: linear-gradient(#fff 0 0) content-box, 
+          linear-gradient(#fff 0 0);
     mask-composite: exclude;
+    
     opacity: 0.5;
-  }
-  
-  @media (max-width: 768px) {
-    padding: 40px 25px;
-    max-width: 100%;
   }
 }
 
