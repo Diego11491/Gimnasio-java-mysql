@@ -1,0 +1,113 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=2069&auto=format&fit=crop') no-repeat center center/cover;
+    padding: 20px;
+  }
+  
+  .login-form {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    color: white;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-weight: 300;
+    font-size: 2rem;
+  }
+  
+  .subtitle {
+    margin-bottom: 25px;
+    color: #ccc;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #333;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #ffc107;
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+  }
+  
+  .btn-submit {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-submit:hover:not(:disabled) {
+    background-color: #e0a800;
+  }
+  
+  .btn-submit:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: #ff4d4d;
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  
+  .error-general {
+    background-color: rgba(255, 77, 77, 0.2);
+    color: #ffb3b3;
+    border: 1px solid #ff4d4d;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .register-link {
+    margin-top: 25px;
+    font-size: 0.9rem;
+  }
+  
+  .register-link a {
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }

@@ -1,0 +1,50 @@
+<div class="form-container">
+    <div class="register-form">
+      <h2>Crear una Cuenta</h2>
+  
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" novalidate>
+  
+        <div class="form-group">
+          <label for="nombres">Nombres</label>
+          <input type="text" id="nombres" formControlName="nombres" class="form-control" placeholder="Escribe tus nombres">
+          <div *ngIf="registroForm.get('nombres')?.invalid && registroForm.get('nombres')?.touched" class="error-message">
+            <small *ngIf="registroForm.get('nombres')?.hasError('required')">Los nombres son requeridos.</small>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="apellidos">Apellidos</label>
+          <input type="text" id="apellidos" formControlName="apellidos" class="form-control" placeholder="Escribe tus apellidos">
+           <div *ngIf="registroForm.get('apellidos')?.invalid && registroForm.get('apellidos')?.touched" class="error-message">
+              <small *ngIf="registroForm.get('apellidos')?.hasError('required')">Los apellidos son requeridos.</small>
+            </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="correo">Correo Electrónico</label>
+          <input type="email" id="correo" formControlName="correo" class="form-control" placeholder="tu.correo@ejemplo.com">
+          <div *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched" class="error-message">
+            <small *ngIf="registroForm.get('correo')?.hasError('required')">El correo es requerido.</small>
+            <small *ngIf="registroForm.get('correo')?.hasError('email')">El formato del correo no es válido.</small>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="contrasena">Contraseña</label>
+          <input type="password" id="contrasena" formControlName="contrasena" class="form-control" placeholder="Mínimo 6 caracteres">
+          <div *ngIf="registroForm.get('contrasena')?.invalid && registroForm.get('contrasena')?.touched" class="error-message">
+            <small *ngIf="registroForm.get('contrasena')?.hasError('required')">La contraseña es requerida.</small>
+            <small *ngIf="registroForm.get('contrasena')?.hasError('minLength')">La contraseña debe tener al menos 6 caracteres.</small>
+          </div>
+        </div>
+  
+        <button type="submit" class="btn-submit" [disabled]="registroForm.invalid">Registrarse</button>
+  
+      </form>
+  
+      <p class="login-link">
+        ¿Ya tienes una cuenta? <a routerLink="/login">Inicia Sesión</a>
+      </p>
+  
+    </div>
+  </div>

@@ -1,0 +1,24 @@
+<div class="hero-container">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+  
+      <div *ngIf="!autenticacionService.isLoggedIn(); else usuarioLogueado">
+        <h1>Smart Gym</h1>
+        <p>Tu viaje hacia una vida más fuerte comienza aquí.</p>
+        <div class="button-container">
+          <a routerLink="/login" class="btn btn-primary">Iniciar Sesión</a>
+          <a routerLink="/registro" class="btn btn-secondary">Registrarse</a>
+        </div>
+      </div>
+  
+      <ng-template #usuarioLogueado>
+        <h1>¡Bienvenido de Nuevo!</h1>
+        <p>Continúa tu progreso y alcanza nuevas metas.</p>
+        <div class="button-container">
+          <a routerLink="/dashboard" class="btn btn-primary">Ir a mi Dashboard</a>
+          <button (click)="cerrarSesion()" class="btn btn-secondary">Cerrar Sesión</button>
+        </div>
+      </ng-template>
+  
+    </div>
+  </div>
