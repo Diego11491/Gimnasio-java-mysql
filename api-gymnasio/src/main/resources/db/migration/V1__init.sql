@@ -1,6 +1,5 @@
 -- =============================================================
--- PROYECTO: Gimnasio (Spring Boot + MySQL)
--- ESQUEMA - v3 
+-- PROYECTO: Gimnasio -  Spring Boot con MySQL
 -- =============================================================
 
 DROP DATABASE IF EXISTS `gymnasioBD`;
@@ -10,18 +9,18 @@ CREATE DATABASE `gymnasioBD`
 USE `gymnasioBD`;
 
 SET NAMES utf8mb4;
-SET time_zone = '+00:00';
+SET time_zone = '-05:00';
 
 -- =========================
 -- TABLA: usuarios
 -- =========================
 CREATE TABLE `usuarios` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `nombres` VARCHAR(100) NOT NULL,
-  `apellidos` VARCHAR(100) NOT NULL,
-  `correo` VARCHAR(255) NOT NULL,
+  `nombres` VARCHAR(30) NOT NULL,
+  `apellidos` VARCHAR(30) NOT NULL,
+  `correo` VARCHAR(50) NOT NULL,
   `contrasena` VARCHAR(60) NOT NULL, -- pensado para BCrypt
-  `telefono` VARCHAR(30) NULL,
+  `telefono` VARCHAR(15) NULL,
   `rol` ENUM('ADMIN','TRAINER','CLIENTE') NOT NULL DEFAULT 'CLIENTE',
   `estado` ENUM('ACTIVO','INACTIVO') NOT NULL DEFAULT 'ACTIVO',
   `fecha_creacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

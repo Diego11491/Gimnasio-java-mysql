@@ -20,36 +20,25 @@ import java.util.stream.Collectors;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtTokenProvider jwt;
-
   public JwtAuthenticationFilter(JwtTokenProvider jwt) {
     this.jwt = jwt;
   }
-
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
       throws ServletException, IOException {
-
     String header = request.getHeader("Authorization");
     if (header == null || !header.startsWith("Bearer ")) {
       chain.doFilter(request, response);
       return;
     }
-
     String token = header.substring(7);
     if (!jwt.esValido(token)) {
       chain.doFilter(request, response);
       return;
     }
-
     String username = jwt.getUsername(token);
-    List<String> roles = jwt.getRoles(token); // p.ej. ["ADMIN","CLIENTE"]
+    List<String> roles = jwt.getRoles(token); 
 
-    // Opción A
-    // List<SimpleGrantedAuthority> authorities = roles.stream()
-    // .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
-    // .collect(Collectors.toList());
-
-    // Opción B (más general):
     Collection<? extends GrantedAuthority> authorities = roles.stream()
         .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
         .collect(Collectors.toList());
