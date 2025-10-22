@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AutenticacionService } from '../../services/autenticacion.service';
+import { NavbarComponent } from '../../Componentes/navbar/navbar.component';
+import { RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NavbarComponent, RouterLink, RouterLinkActive],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

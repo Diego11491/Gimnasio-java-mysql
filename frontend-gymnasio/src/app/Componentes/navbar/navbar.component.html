@@ -1,0 +1,22 @@
+<nav class="navbar">
+    <div class="navbar-container">
+      <a class="navbar-brand" routerLink="/dashboard">
+        Smart<span class="brand-highlight">Gym</span>
+      </a>
+      <div class="navbar-links">
+        <a routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+        <a routerLink="/clases" routerLinkActive="active-link">Clases</a>
+        <a routerLink="/mis-rutinas" routerLinkActive="active-link">Mis Rutinas</a>
+        <a routerLink="/mi-progreso" routerLinkActive="active-link">Mi Progreso</a>
+      </div>
+      <div class="navbar-user">
+        @if (nombreUsuario) {
+          <span class="user-greeting">Hola, {{ nombreUsuario }}</span>
+        }
+        <div class="user-actions">
+          <a routerLink="/mi-perfil" class="profile-link">Mi Perfil</a>
+          <button (click)="autenticacionService.logout()" class="btn-logout">Salir</button>
+        </div>
+      </div>
+    </div>
+  </nav>

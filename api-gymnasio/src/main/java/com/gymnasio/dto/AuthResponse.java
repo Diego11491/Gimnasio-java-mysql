@@ -6,6 +6,7 @@ public record AuthResponse(
     String correo, 
     String rol, 
     String nombres, 
-    String apellidos
+    String apellidos,
+    Integer id
 ) {
 }

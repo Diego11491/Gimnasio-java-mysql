@@ -1,3 +1,4 @@
+
 <div class="dashboard-container">
   <!-- Overlay con efectos -->
   <div class="background-overlay"></div>
@@ -18,32 +19,27 @@
 
   <div class="dashboard-content">
     <!-- Header del Dashboard -->
-    <div class="dashboard-header">
-      <div class="logo-container">
-        <div class="logo-glow"></div>
-        <div class="logo-circle">
-          <span class="logo-icon">💪</span>
+    <div class="dashboard-container">
+      <div class="dashboard-content">
+        
+        <div class="dashboard-header">
+          
+          <div class="logo-container">
+             </div>
+    
+          <div class="welcome-section">
+             </div>
+    
+          <div class="navbar-links">
+            <a routerLink="/dashboard" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+            <a routerLink="/clases" routerLinkActive="active-link">Clases</a>
+            <a routerLink="/mis-rutinas" routerLinkActive="active-link">Mis Rutinas</a>
+            <a routerLink="/mi-progreso" routerLinkActive="active-link">Mi Progreso</a>
+            <a routerLink="/mi-perfil" routerLinkActive="active-link">Mi Perfil</a>
+          </div>
+          <button (click)="cerrarSesion()" class="btn-logout">
+            </button>
         </div>
-      </div>
-
-      <div class="welcome-section">
-        <h1 *ngIf="nombreUsuario">
-          <span class="welcome-text">¡Bienvenido,</span>
-          <span class="user-name">{{ nombreUsuario }}!</span>
-        </h1>
-        <p class="subtitle">
-          <span class="subtitle-icon">🚀</span>
-          Tu centro de control fitness
-        </p>
-      </div>
-
-      <button (click)="cerrarSesion()" class="btn-logout">
-        <span class="btn-content">
-          <span class="logout-icon">🚪</span>
-          <span>Cerrar Sesión</span>
-        </span>
-      </button>
-    </div>
 
     <!-- Cards de estadísticas rápidas -->
     <div class="stats-grid">

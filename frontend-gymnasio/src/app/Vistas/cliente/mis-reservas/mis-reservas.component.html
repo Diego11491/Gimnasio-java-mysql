@@ -1,0 +1,46 @@
+<div class="reservas-container">
+    <h1>Mis Reservas</h1>
+  
+    @if (isLoading) {
+      <div class="loading">Cargando tus reservas...</div>
+    }
+  
+    <div class="reservas-grid">
+  
+      @for (reserva of misReservas; track reserva.id) {
+        <div class="reserva-card" [ngClass]="'estado-' + reserva.estado.toLowerCase()">
+  
+          <div class="card-header">
+            <h3>{{ reserva.clase?.titulo || 'Clase no disponible' }}</h3>
+            <span class="reserva-estado">{{ reserva.estado }}</span>
+          </div>
+  
+          <div class="card-body">
+            <div class="info-item">
+              <strong>Instructor:</strong> {{ reserva.clase?.instructorNombre || 'N/A' }}
+            </div>
+            <div class="info-item">
+              <strong>Cuándo:</strong> {{ reserva.clase?.fechaInicio | date:'fullDate' }} a las {{ reserva.clase?.fechaInicio | date:'shortTime' }}
+            </div>
+            <div class="info-item">
+              <strong>Fecha de Reserva:</strong> {{ reserva.fechaReserva | date:'short' }}
+            </div>
+          </div>
+  
+          <div class="card-footer">
+            @if (reserva.estado === 'RESERVADA') {
+              <button class="btn-cancelar" (click)="cancelar(reserva.id)">
+                Cancelar Reserva
+              </button>
+            } @else {
+              <p class="estado-info">Esta reserva ya no está activa.</p>
+            }
+          </div>
+        </div>
+      } @empty {
+        @if (!isLoading) {
+          <p class="no-reservas">Aún no tienes ninguna reserva. ¡Anímate a inscribirte a una clase!</p>
+        }
+      }
+    </div>
+  </div>

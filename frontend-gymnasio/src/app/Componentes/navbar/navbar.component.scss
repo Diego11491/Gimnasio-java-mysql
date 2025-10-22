@@ -1,0 +1,77 @@
+:host {
+    display: block;
+    width: 100%;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 70px;
+    color: white;
+  }
+  
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-decoration: none;
+    color: white;
+    .brand-highlight {
+      color: #ffc107;
+    }
+  }
+  
+  .navbar-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s;
+    &.active-link {
+      color: #ffc107;
+      font-weight: 700;
+    }
+    &:hover {
+      color: white;
+    }
+  }
+  
+  .navbar-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .user-greeting {
+    font-style: italic;
+    color: #aaa;
+  }
+  
+  .profile-link {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  .btn-logout {
+    background: #ffc107;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: #e0a800;
+    }
+  }

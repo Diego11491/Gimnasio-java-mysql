@@ -609,3 +609,59 @@
     font-weight: 600;
   }
 }
+
+/* Pega esto al final de tu archivo dashboard.component.scss */
+
+.dashboard-header {
+  /* Hacemos que la cabecera sea más flexible para los enlaces */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 193, 7, 0.1);
+  
+  /* Esto se aplica a los 3 elementos principales del header en pantallas grandes */
+  @media (min-width: 1200px) {
+    width: auto;
+    order: 2; /* Cambia el orden visual */
+    border-top: none;
+    padding-top: 0;
+  }
+  
+  a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 0.9rem;
+    
+    &.active-link {
+      color: #ffc107;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+    }
+    
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.welcome-section {
+  @media (min-width: 1200px) {
+    order: 1; /* Mantiene el saludo a la izquierda */
+  }
+}
+
+.btn-logout {
+   @media (min-width: 1200px) {
+    order: 3; /* Mueve el botón de salir a la derecha */
+  }
+}

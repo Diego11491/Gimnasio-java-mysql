@@ -37,12 +37,17 @@ export class AutenticacionService {
     return null;
   }
 
+  getUsuarioId(): string | null {
+    return localStorage.getItem('usuario_id');
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     // --- LÍNEA NUEVA ---
     // Asegúrate de borrar también los datos del usuario al cerrar sesión
     localStorage.removeItem('usuario_nombres');
     localStorage.removeItem('usuario_apellidos');
+    localStorage.removeItem('usuario_id');
     this.router.navigate(['/']);
   }
 }

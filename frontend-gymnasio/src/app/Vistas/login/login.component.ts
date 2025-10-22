@@ -39,7 +39,8 @@ export class LoginComponent {
         
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario_nombres', response.nombres);   // <--- LÍNEA NUEVA
-        localStorage.setItem('usuario_apellidos', response.apellidos);
+        localStorage.setItem('usuario_apellidos', response.apellidos);  
+        localStorage.setItem('usuario_id', response.id);
 
         // Redirigimos al usuario a una página principal o dashboard (puedes cambiar '/dashboard' a tu ruta deseada)
         alert(`¡Bienvenido de vuelta, ${response.nombres}!`);

@@ -64,7 +64,8 @@ public class AutenticacionController {
                         user.getCorreo(),
                         user.getRol().name(),
                         user.getNombres(),    // <--- Campo añadido
-                        user.getApellidos()   // <--- Campo añadido
+                        user.getApellidos(),   // <--- Campo añadido
+                        user.getId()
                 )
         );
     } catch (BadCredentialsException ex) {

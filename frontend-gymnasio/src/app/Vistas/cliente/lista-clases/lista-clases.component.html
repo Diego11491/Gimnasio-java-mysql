@@ -1,0 +1,37 @@
+<div class="clases-container">
+    <h1>Clases Programadas</h1>
+    <div class="clases-grid">
+      
+      @for (clase of clases; track clase.id) {
+        <div class="clase-card">
+          <div class="card-header">
+            <h3>{{ clase.titulo }}</h3>
+            <span class="tipo-clase">{{ clase.tipo }}</span>
+          </div>
+          <div class="card-body">
+            <p>{{ clase.descripcion }}</p>
+            <div class="info-item">
+              <strong>Instructor:</strong> {{ clase.instructorNombre }}
+            </div>
+            <div class="info-item">
+              <strong>Cuándo:</strong> {{ clase.fechaInicio | date:'medium' }}
+            </div>
+            <div class="info-item">
+              <strong>Duración:</strong> {{ clase.duracionMinutos }} min.
+            </div>
+            <div class="info-item">
+              <strong>Cupos:</strong> {{ clase.capacidad }}
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class="btn-reservar" (click)="reservar(clase.id)">
+              Reservar Cupo
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <p>No hay clases programadas por el momento.</p>
+      }
+  
+    </div>
+  </div>
